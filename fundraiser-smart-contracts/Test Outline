@@ -1,0 +1,57 @@
+2. Deposit Tests
+
+✅ Contributors can deposit ETH before deadline.
+
+❌ Deposits after deadline revert with DeadlinePassed.
+
+✅ Multiple deposits accumulate correctly in contributors and totalRaised.
+
+✅ DepositMade event emitted with correct values.
+
+3. Withdraw Tests
+
+✅ Only deployer can call withdraw().
+
+❌ Non‑deployer reverts with NotAuthorized.
+
+✅ Withdraw succeeds if totalRaised >= fundingGoal.
+
+❌ Withdraw reverts if totalRaised < fundingGoal.
+
+✅ FundsWithdrawal event emitted with correct amount.
+
+✅ Contract balance goes to deployer after withdraw.
+
+4. Refund Tests
+
+✅ Contributors can refund after deadline if goal not met.
+
+❌ Refund before deadline reverts with DeadlineNotPassed.
+
+❌ Refund when goal met reverts with GoalWasMet.
+
+✅ Contributor’s balance resets to zero after refund.
+
+✅ RefundIssued event emitted with correct values.
+
+✅ Contract balance decreases accordingly.
+
+5. Status Tests
+
+✅ checkStatus() returns active before deadline and before goal.
+
+✅ Returns successful when goal met.
+
+✅ Returns failed after deadline if goal not met.
+
+✅ Functions respect checkStatus() (withdraw only when successful, refund only when failed).
+
+6. Edge Cases
+
+✅ Zero contribution refund (should revert or return nothing).
+
+✅ Multiple contributors refund independently.
+
+✅ Early withdraw allowed once goal met (if that’s your intended design).
+
+✅ Re‑entrancy protection: contributors set to zero before transfer.
